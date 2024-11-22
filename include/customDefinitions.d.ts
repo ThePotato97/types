@@ -535,6 +535,11 @@ interface InsertService extends Instance {
 
 interface Object {
 	readonly Changed: unknown;
+	IsA<T extends keyof Instances>(this: Instance, className: T): this is Instances[T];
+	GetPropertyChangedSignal<T extends Instance>(
+		this: T,
+		propertyName: InstancePropertyNames<T>,
+	): RBXScriptSignal<() => void>;
 }
 
 interface Instance extends Object {
@@ -565,7 +570,6 @@ interface Instance extends Object {
 	FindFirstChild(this: Instance, childName: string | number, recursive?: boolean): Instance | undefined;
 	WaitForChild(this: Instance, childName: string | number): Instance;
 	WaitForChild(this: Instance, childName: string | number, timeOut: number): Instance | undefined;
-	IsA<T extends keyof Instances>(this: Instance, className: T): this is Instances[T];
 	FindFirstAncestorWhichIsA<T extends keyof Instances>(this: Instance, className: T): Instances[T] | undefined;
 	FindFirstChildWhichIsA<T extends keyof Instances>(
 		this: Instance,
@@ -574,10 +578,6 @@ interface Instance extends Object {
 	): Instances[T] | undefined;
 	FindFirstAncestorOfClass<T extends keyof Instances>(this: Instance, className: T): Instances[T] | undefined;
 	FindFirstChildOfClass<T extends keyof Instances>(this: Instance, className: T): Instances[T] | undefined;
-	GetPropertyChangedSignal<T extends Instance>(
-		this: T,
-		propertyName: InstancePropertyNames<T>,
-	): RBXScriptSignal<() => void>;
 	GetAttribute(this: Instance, attribute: string): AttributeValue | undefined;
 	SetAttribute(this: Instance, attribute: string, value: AttributeValue | undefined): void;
 	GetAttributes(this: Instance): Map<string, AttributeValue>;
