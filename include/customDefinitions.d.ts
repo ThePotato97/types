@@ -342,16 +342,13 @@ interface Dragger extends Instance {
 }
 
 interface EditableImage extends Object {
-	ReadPixels(this: EditableImage, position: Vector2, size: Vector2): Array<number>;
+
 }
 
 interface EditableMesh extends Object {
 	FindClosestPointOnSurface(this: EditableMesh, point: Vector3): LuaTuple<[number, Vector3, Vector3]>;
 	FindVerticesWithinSphere(this: EditableMesh, center: Vector3, radius: number): Array<number>;
-	GetAdjacentTriangles(this: EditableMesh, triangleId: number): Array<number>;
 	GetAdjacentVertices(this: EditableMesh, vertexId: number): Array<number>;
-	GetTriangleVertices(this: EditableMesh, triangleId: number): LuaTuple<[number, number, number]>;
-	GetTriangles(this: EditableMesh): Array<number>;
 	GetVertices(this: EditableMesh): Array<number>;
 	RaycastLocal(this: EditableMesh, origin: Vector3, direction: Vector3): LuaTuple<[number, Vector3, Vector3]>;
 }
