@@ -341,10 +341,6 @@ interface Dragger extends Instance {
 	MouseDown(this: Dragger, mousePart: BasePart, pointOnMousePart: Vector3, parts: Array<BasePart>): void;
 }
 
-interface EditableImage extends Object {
-
-}
-
 interface EditableMesh extends Object {
 	FindClosestPointOnSurface(this: EditableMesh, point: Vector3): LuaTuple<[number, Vector3, Vector3]>;
 	FindVerticesWithinSphere(this: EditableMesh, center: Vector3, radius: number): Array<number>;
@@ -537,15 +533,9 @@ interface InsertService extends Instance {
 	GetUserSets(this: InsertService, userId: number): Array<SetInfo>;
 }
 
-interface Content {
-	fromUri(this: Content, uri: string): Content;
-	fromObject(this: Content, object: Object): Content;
-	none: Content;
-	SourceType: Enum.ContentSourceType;
-	Uri: string;
-	Object: Object;
+interface Object {
+	readonly Changed: unknown;
 }
-
 
 interface Instance extends Object {
 	/**
@@ -568,7 +558,6 @@ interface Instance extends Object {
 	 * 	(p as Part & ChangedSignal).Changed.Connect(changedPropertyName => {})
 	 * }
 	 */
-	readonly Changed: unknown;
 	GetActor(this: Instance): Actor | undefined;
 	GetChildren(this: Instance): Array<Instance>;
 	GetDescendants(this: Instance): Array<Instance>;
